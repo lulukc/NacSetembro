@@ -50,19 +50,30 @@ public class AnotacaoActivity extends AppCompatActivity {
     }
 
     public void salvarNovaAnotacao(View v) {
-        if (anotacao == null){
+        if (anotacao == null) {
             anotacao = new Anotacao(titulo.getText().toString(), conteudo.getText().toString());
             if (!anotacao.getTitulo().isEmpty()) {
                 db.criarAnotacao(anotacao);
             }
-        }else {
+        } else {
             anotacao.setTitulo(titulo.getText().toString());
             anotacao.setConteudo(conteudo.getText().toString());
             db.atualizaAnotecao(anotacao);
         }
 
+        votarMain();
+    }
+
+    private void votarMain() {
         intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void descartarAnotacao(View v) {
+        if(anotacao != null){
+            db.apagarNota(anotacao.getId());
+        }
+        votarMain();
     }
 
 }

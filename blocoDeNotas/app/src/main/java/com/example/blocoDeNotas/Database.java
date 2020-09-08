@@ -69,4 +69,9 @@ public class Database extends SQLiteOpenHelper implements Serializable {
         db.update("ANOTACAO",cv,"ID_ANOTACAO=?",new String[]{anotacao.getId().toString()});
     }
 
+    public void apagarNota(Integer id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("ANOTACAO","ID_ANOTACAO=?",new String[]{id.toString()});
+    }
+
 }
